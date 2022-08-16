@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
