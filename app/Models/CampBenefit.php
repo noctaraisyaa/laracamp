@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CampBenefit extends Model
 {
     use HasFactory;
+    public function camp(){
+        return $this->hasOne(Camps::class, 'camps_id', 'id');
+    }
 }

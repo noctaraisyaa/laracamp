@@ -17,11 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+Route::get('/', [LandingPageController::class, 'index']);
 Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/auth/google', [LoginController::class, 'google'])->name('login.google');
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']], function () {
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('ceklogin:user');
+Route::get('checkout/{camps:slug}', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('checkout/{camps:slug}', [CheckoutController::class, 'store'])->name('checkout.post');
+
+});

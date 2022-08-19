@@ -33,7 +33,7 @@
                 </ul>
                 <div class="d-flex user-logged">
                     <a href="#">
-                        Halo, Beatrice!
+                    {{Auth::user()->email}}
                         <img src="{{asset('assets/images/user_photo.png')}}" class="user-photo" alt="">
                     </a>
                 </div>

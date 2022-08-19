@@ -38,4 +38,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function checkout(){
+        return $this->hasMany(Checkout::class, 'users_id', 'id');
+    }
 }
